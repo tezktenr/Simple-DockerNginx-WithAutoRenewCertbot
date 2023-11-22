@@ -1,0 +1,35 @@
+services:
+  nginxserver:
+    build: ./nginx/
+    profiles: ["server"]
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx/webpage/:/tezktenrblog/var/www/:ro
+      - ./certbot/www/:/var/www/certbot:ro
+      - ./certbot/conf/:/etc/nginx/ssl:ro
+      - ./nginx/log/:/var/log/nginx/:rw
+  certbotrenewer:
+    build: ./certbot/
+    profiles: ["server"]
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+      - ./certbot/log/:/var/log/certbot/:rw
+  certbot:
+    image: certbot/certbot:v2.7.4
+    profiles: ["certonly"]
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+  nginxnocert:
+    build: ./nginxnocert/
+    profiles: ["nocertserver"]
+    ports:
+      - 80:80
+    volumes:
+      - ./certbot/www/:/var/www/certbot:ro
+      - ./certbot/conf/:/etc/nginx/ssl:ro
+      - ./nginx/log/:/var/log/nginx/:rw

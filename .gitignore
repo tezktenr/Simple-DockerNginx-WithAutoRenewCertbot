@@ -1,0 +1,7 @@
+#exclude all logs
+nginx/log/
+certbot/log/
+
+#exclude certbot generated files
+certbot/conf/
+certbot/www/
