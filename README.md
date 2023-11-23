@@ -17,6 +17,6 @@ docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certb
 # Running the nginx HTTPS server
 Start the server (replace example.org with your domain):
 ```
-docker compose --profile server build --build-arg DOMAIN_NAME=example.org
+docker compose --profile server build --build-arg DOMAIN_NAME=example.org --no-cache
 docker compose --profile server up -d
 ```
