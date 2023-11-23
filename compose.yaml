@@ -6,6 +6,7 @@ services:
       - 80:80
       - 443:443
       - 8080:8080
+    network_mode: bridge
     restart: always
     volumes:
       - ./nginx/webpage/:/tezktenrblog/var/www/:ro
@@ -30,6 +31,7 @@ services:
     profiles: ["nocertserver"]
     ports:
       - 80:80
+    network_mode: bridge
     volumes:
       - ./certbot/www/:/var/www/certbot:ro
       - ./certbot/conf/:/etc/nginx/ssl:ro
