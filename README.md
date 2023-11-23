@@ -1,3 +1,9 @@
+# Allowlisting all the ports via firewall
+```
+sudo ufw allow 80
+sudo ufw allow 443
+```
+
 # Generating the SSL certificate for the first time
 Start and keep the nginx server (no cert version.) on:
 ```
